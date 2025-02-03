@@ -132,20 +132,17 @@ function animate() {
     platforms.forEach(platform => {
         if (player.position.y + player.height <= platform.position.y &&
             player.position.y + player.height + player.velocity.y >= platform.position.y &&
-            player.position.x + player.width >= platform.position.x &&
-            player.position.x <= platform.position.x + platform.width) {
+            player.position.x + player.width - 90 >= platform.position.x &&
+            player.position.x <= platform.position.x + platform.width - 90) {
             player.velocity.y = 0;
         }
     });
 
-    console.log(pos);
-    if (pos > 1000) {
-        console.log("YOU WIN!");
-    }
 }
 
 document.addEventListener('keydown', (event) => {
-    switch (event.key) {
+    const key = event.key.toLowerCase();
+    switch (key) {
         case 'a':
             keys.left.pressed = true;
             player.currentSprite = player.sprites.run.left;
@@ -161,7 +158,8 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
-    switch (event.key) {
+    const key = event.key.toLowerCase();
+    switch (key) {
         case 'a':
             keys.left.pressed = false;
             if (!keys.right.pressed) {
